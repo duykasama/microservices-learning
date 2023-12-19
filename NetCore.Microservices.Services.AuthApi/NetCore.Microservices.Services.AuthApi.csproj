@@ -8,11 +8,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="netcore.webapicommon.core" Version="1.0.2" />
-        <PackageReference Include="NetCore.WebApiCommon.Core.Api" Version="1.0.2" />
-        <PackageReference Include="NetCore.WebApiCommon.Core.Common" Version="1.0.2" />
-        <PackageReference Include="NetCore.WebApiCommon.Core.DAL" Version="1.0.2" />
-        <PackageReference Include="NetCore.WebApiCommon.Infrastructure" Version="1.0.2" />
+        <PackageReference Include="netcore.webapicommon.core" Version="1.0.3" />
+        <PackageReference Include="NetCore.WebApiCommon.Core.Api" Version="1.0.3" />
+        <PackageReference Include="NetCore.WebApiCommon.Core.Common" Version="1.0.3" />
+        <PackageReference Include="NetCore.WebApiCommon.Core.DAL" Version="1.0.3" />
+        <PackageReference Include="NetCore.WebApiCommon.Infrastructure" Version="1.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 

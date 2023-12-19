@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
+using NetCore.WebApiCommon.Api.Controllers;
+using NetCore.WebApiCommon.Api.Models;
 
 namespace NetCore.Microservices.Services.CouponApi.Controllers;
 
-[ApiController]
 [Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherForecastController : BaseController
 {
     private static readonly string[] Summaries = new[]
     {
@@ -19,14 +20,18 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpGet(Name = "GetWeatherForecast")]
-    public IEnumerable<WeatherForecast> Get()
+    public async Task<IActionResult> Get()
     {
-        return Enumerable.Range(1, 5).Select(index => new WeatherForecast
+        var apiActionResult = new ApiActionResult(true){Data = Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
             })
-            .ToArray();
+            .ToArray()};
+
+        return await ExecuteApiAsync(
+            () => Task.FromResult(apiActionResult)
+        ).ConfigureAwait(false);
     }
 }
