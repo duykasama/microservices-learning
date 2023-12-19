@@ -1,11 +1,22 @@
 ﻿using System.Reflection;
 using Autofac;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using NetCore.Microservices.Services.CouponApi.Data;
+using NetCore.Microservices.Services.CouponApi.Implementations.Repositories;
+using NetCore.Microservices.Services.CouponApi.Implementations.Services;
+using NetCore.Microservices.Services.CouponApi.Interfaces.Repositories;
+using NetCore.Microservices.Services.CouponApi.Interfaces.Services;
+using NetCore.Microservices.Services.CouponApi.Mappings.AutoMapper;
 using NetCore.WebApiCommon.Api.Middlewares;
 using NetCore.WebApiCommon.Core.Common.Helpers;
 using NetCore.WebApiCommon.Core.Common.Implementations;
 using NetCore.WebApiCommon.Core.Common.Interfaces;
+using NetCore.WebApiCommon.Core.DAL.Implementations;
+using NetCore.WebApiCommon.Core.DAL.Interfaces;
 using NetCore.WebApiCommon.Infrastructure.Extensions;
 using NetCore.WebApiCommon.Infrastructure.Implementations;
+using ServiceCollectionExtensions = NetCore.WebApiCommon.Infrastructure.Extensions.ServiceCollectionExtensions;
 
 namespace NetCore.Microservices.Services.CouponApi;
 
@@ -16,7 +27,7 @@ public class Startup
     public Startup(IConfiguration configuration)
     {
         Configuration = configuration;
-        TestExtensions.InitConfiguration(Configuration);
+        ServiceCollectionExtensions.InitConfiguration(Configuration);
     }
     
     public void ConfigureContainer(ContainerBuilder builder)
@@ -25,32 +36,63 @@ public class Startup
             .As<ILogService>()
             .InstancePerLifetimeScope();
        
-        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(MicrosoftDependencyProvider))!)
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(AutofacDependencyProvider))!)
             .As<IDependencyProvider>()
             .InstancePerLifetimeScope();
         
         builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CorrelationIdGenerator))!)
             .As<ICorrelationIdGenerator>()
             .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponDbContext))!)
+            .As<IAppDbContext>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(UnitOfWork))!)
+            .As<IUnitOfWork>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponRepository))!)
+            .As<ICouponRepository>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponService))!)
+            .As<ICouponService>()
+            .InstancePerLifetimeScope();
+
+        var config = new MapperConfiguration(AutoMapperConfiguration.Map);
+        var mapper = config.CreateMapper();
+        builder.RegisterInstance(mapper).As<IMapper>();
+
+        // var scope = builder.Build().BeginLifetimeScope();
+        // DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
     }
     
     public void ConfigureServices(IServiceCollection services)
     {
-        // services.AddCustomSwagger();
+        services.AddCustomSwagger();
         services.AddControllers();
     }
 
     public void Configure(IApplicationBuilder app)
     {
+        DependencyInjectionHelper.InitProvider(app.ApplicationServices.GetService<IDependencyProvider>()!);
+        EnsureMigrations();
         
-        // DependencyInjectionHelper.InitProvider(app.ApplicationServices.GetService<IDependencyProvider>()!);
-        ((WebApplication)app).TestEnvironment("Development");
-        // app.UseSwaggerUI();
-        // app.UseSwagger();
+        app.UseSwaggerInEnvironments("Development");
         app.UseRouting();
         app.UseHttpsRedirection();
         app.UseMiddleware<CorrelationIdHandlerMiddleware>();
         app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
         app.UseEndpoints(endpoints => endpoints.MapControllers());
+    }
+
+    private void EnsureMigrations()
+    {
+        if (DependencyInjectionHelper.ResolveService<IAppDbContext>() is CouponDbContext couponDbContext 
+            && couponDbContext.Database.GetPendingMigrations().Any())
+        {
+            couponDbContext.Database.Migrate();
+        }
     }
 }

@@ -3,31 +3,21 @@ using NetCore.Microservices.Services.CouponApi;
 using NetCore.WebApiCommon.Core.Common.Models;
 using NLog;
 
-namespace NetCore.Microservices.Services.CouponApi
-{
-    public class Program
+GlobalData.ModuleName = AppDomain.CurrentDomain.FriendlyName;
+GlobalData.CurrentEnvironment = "Development";
+
+LogManager.Setup()
+    .LoadConfigurationFromFile($"{Directory.GetCurrentDirectory()}/Configurations/nlog.config")
+    .GetCurrentClassLogger();
+
+var host = Host.CreateDefaultBuilder(args)
+    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureWebHostDefaults(builder =>
     {
-        public static void Main(string[] args)
-        {
-            GlobalData.ModuleName = AppDomain.CurrentDomain.FriendlyName;
+        builder.UseStartup<Startup>();
+    })
+    .Build();
 
-            LogManager.Setup()
-                .LoadConfigurationFromFile($"{Directory.GetCurrentDirectory()}/Configurations/nlog.config")
-                .GetCurrentClassLogger();
+host.Run();
 
-            var host = Host.CreateDefaultBuilder(args)
-                .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .ConfigureWebHostDefaults(builder =>
-                {
-                    builder.UseStartup<Startup>();
-                })
-                .Build();
-
-            host.Run();
-
-            LogManager.Shutdown();
-        }
-    }
-}
-
-
+LogManager.Shutdown();
