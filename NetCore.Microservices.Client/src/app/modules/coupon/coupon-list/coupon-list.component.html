@@ -19,17 +19,17 @@
                 </colgroup>
                 <thead class="border-b border-black">
                     <tr>
-                        <th class="text-start pl-2">Coupon Code</th>
+                        <th class="text-start pl-2 py-2">Coupon Code</th>
                         <th class="text-start">Discount Amount</th>
                         <th class="text-start">Minimum Amount</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="p-2">10OFF</td>
-                        <td>10%</td>
-                        <td>299</td>
+                    <tr *ngFor="let coupon of couponsList">
+                        <td class="p-2">{{ coupon.couponCode }}</td>
+                        <td>{{ coupon.discountAmount }}</td>
+                        <td>{{ coupon.minAmount }}</td>
                         <td class="text-center cursor-pointer">
                             <fa-icon [icon]="faTrash" class="text-red-500"></fa-icon>
                         </td>

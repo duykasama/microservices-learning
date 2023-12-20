@@ -1,26 +1,11 @@
-using System.Reflection;
-using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NetCore.Microservices.Services.CouponApi;
 using NetCore.Microservices.Services.CouponApi.Data;
-using NetCore.Microservices.Services.CouponApi.Implementations.Repositories;
-using NetCore.Microservices.Services.CouponApi.Implementations.Services;
-using NetCore.Microservices.Services.CouponApi.Interfaces.Repositories;
-using NetCore.Microservices.Services.CouponApi.Interfaces.Services;
-using NetCore.Microservices.Services.CouponApi.Mappings.AutoMapper;
-using NetCore.WebApiCommon.Api.Middlewares;
 using NetCore.WebApiCommon.Core.Common.Helpers;
-using NetCore.WebApiCommon.Core.Common.Implementations;
-using NetCore.WebApiCommon.Core.Common.Interfaces;
 using NetCore.WebApiCommon.Core.Common.Models;
-using NetCore.WebApiCommon.Core.DAL.Implementations;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
-using NetCore.WebApiCommon.Infrastructure.Extensions;
-using NetCore.WebApiCommon.Infrastructure.Implementations;
 using NLog;
-using ServiceCollectionExtensions = NetCore.WebApiCommon.Infrastructure.Extensions.ServiceCollectionExtensions;
 
 GlobalData.ModuleName = AppDomain.CurrentDomain.FriendlyName;
 GlobalData.CurrentEnvironment = "Development";
