@@ -60,7 +60,7 @@ public class Startup
             .As<ICouponService>()
             .InstancePerLifetimeScope();
 
-        var config = new MapperConfiguration(AutoMapperConfiguration.Map);
+        var config = new MapperConfiguration(AutoMapperConfiguration.RegisterMaps);
         var mapper = config.CreateMapper();
         builder.RegisterInstance(mapper).As<IMapper>();
 

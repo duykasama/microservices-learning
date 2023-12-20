@@ -5,5 +5,4 @@ namespace NetCore.Microservices.Services.CouponApi.Interfaces.Repositories;
 
 public interface ICouponRepository : IRepository<Coupon, int>
 {
-    
 }
