@@ -20,6 +20,9 @@ jobs:
         with:
           dotnet-version: 7.0.x
       
+      - name: Setup nuget source
+        run: dotnet nuget add source -u ${{ secrets.GH_USER_NAME }} -p ${{ secrets.GH_AUTH_TOKEN }} --store-password-in-clear-text -n github ${{ secrets.GH_NUGET_SOURCE_URL }}
+      
       - name: Restore dependencies
         run: dotnet restore
         
