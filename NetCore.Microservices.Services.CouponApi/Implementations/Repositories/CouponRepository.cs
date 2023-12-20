@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using Microsoft.EntityFrameworkCore;
 using NetCore.Microservices.Services.CouponApi.Domain.Entities;
 using NetCore.Microservices.Services.CouponApi.Interfaces.Repositories;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
@@ -39,9 +40,10 @@ public class CouponRepository : ICouponRepository
         throw new NotImplementedException();
     }
 
-    public async Task UpdateAsync(Coupon entity)
+    public Task UpdateAsync(Coupon entity)
     {
-        throw new NotImplementedException();
+        _dbContext.CreateSet<Coupon, int>().Entry(entity).State = EntityState.Modified;
+        return Task.CompletedTask;
     }
 
     public void UpdateMany(IEnumerable<Coupon> entities)
@@ -99,9 +101,10 @@ public class CouponRepository : ICouponRepository
         throw new NotImplementedException();
     }
 
-    public async Task<IQueryable<Coupon>> GetAllAsync()
+    public Task<IQueryable<Coupon>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        var queryableCoupons = _dbContext.CreateSet<Coupon, int>().AsQueryable();
+        return Task.FromResult(queryableCoupons);
     }
 
     public Coupon? Get(object id)
@@ -114,14 +117,14 @@ public class CouponRepository : ICouponRepository
         throw new NotImplementedException();
     }
 
-    public async Task<Coupon?> GetAsync(object id)
+    public Task<Coupon?> GetAsync(object id)
     {
-        throw new NotImplementedException();
+        return _dbContext.CreateSet<Coupon, int>().SingleOrDefaultAsync(c => c.Id == (int)id);
     }
 
-    public async Task<Coupon?> GetAsync(Expression<Func<Coupon, bool>> predicate)
+    public Task<Coupon?> GetAsync(Expression<Func<Coupon, bool>> predicate)
     {
-        throw new NotImplementedException();
+        return _dbContext.CreateSet<Coupon, int>().FirstOrDefaultAsync(predicate);
     }
 
     public IQueryable<Coupon> Find(Expression<Func<Coupon, bool>> predicate)

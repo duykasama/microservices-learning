@@ -60,7 +60,7 @@ public class Startup
             .As<ICouponService>()
             .InstancePerLifetimeScope();
 
-        var config = new MapperConfiguration(AutoMapperConfiguration.Map);
+        var config = new MapperConfiguration(AutoMapperConfiguration.RegisterMaps);
         var mapper = config.CreateMapper();
         builder.RegisterInstance(mapper).As<IMapper>();
 
@@ -72,6 +72,16 @@ public class Startup
     {
         services.AddCustomSwagger();
         services.AddControllers();
+        services.AddCors(options =>
+        {
+            options.AddDefaultPolicy(builder =>
+            {
+                builder.WithOrigins("http://localhost:4200")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials();
+            });
+        });
     }
 
     public void Configure(IApplicationBuilder app)
@@ -80,6 +90,7 @@ public class Startup
         EnsureMigrations();
         
         app.UseSwaggerInEnvironments("Development");
+        app.UseCors();
         app.UseRouting();
         app.UseHttpsRedirection();
         app.UseMiddleware<CorrelationIdHandlerMiddleware>();

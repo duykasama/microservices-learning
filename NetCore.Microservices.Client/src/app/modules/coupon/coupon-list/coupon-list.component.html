@@ -1,0 +1,41 @@
+<section class="flex justify-center py-6">
+    <div class="flex flex-col w-[1500px] shadow-md shadow-gray-900">
+        <div class="bg-[#6b7d80] py-5 text-3xl font-semibold text-white rounded-tl-md rounded-tr-md">
+            <h2 class="text-center">Coupons List</h2>
+        </div>
+        <div class="bg-[#383444] rounded-bl-md rounded-br-md px-4 pb-8">
+            <div class="flex justify-end py-4">
+                <div class="text-white flex justify-center items-center gap-2 rounded py-2 px-3 border border-black w-fit cursor-pointer">
+                    <fa-icon [icon]="faPlusSquare"></fa-icon>
+                    <p>Create New Coupon</p>
+                </div>
+            </div>
+            <table class="w-full bg-[#3d424b] text-white">
+                <colgroup>
+                    <col class="w-[30%] pl-2">
+                    <col class="w-[30%]">
+                    <col class="w-[30%]">
+                    <col class="w-[10%]">
+                </colgroup>
+                <thead class="border-b border-black">
+                    <tr>
+                        <th class="text-start pl-2 py-2">Coupon Code</th>
+                        <th class="text-start">Discount Amount</th>
+                        <th class="text-start">Minimum Amount</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let coupon of couponsList">
+                        <td class="p-2">{{ coupon.couponCode }}</td>
+                        <td>{{ coupon.discountAmount }}</td>
+                        <td>{{ coupon.minAmount }}</td>
+                        <td class="text-center cursor-pointer">
+                            <fa-icon [icon]="faTrash" class="text-red-500"></fa-icon>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
