@@ -2,3 +2,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    background-color: #292931;
+}
+
+.layout {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+}
