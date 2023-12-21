@@ -1,0 +1,54 @@
+﻿name: Publish docker images
+
+on: 
+  push:
+    tags:
+      - "v*"
+
+env: 
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ghcr.io/${{ github.actor }}
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+        
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with: 
+          dotnet-version: 7.0.x
+      
+      - name: Setup nuget source
+        run: dotnet nuget add source -u ${{ secrets.GH_USER_NAME }} -p ${{ secrets.GH_AUTH_TOKEN }} -n github --store-password-in-clear-text ${{ secrets.GH_NUGET_SOURCE_URL }}
+      
+      - name: Restore dependencies
+        run: dotnet restore
+    
+      - name: Build projects
+        run: dotnet build --no-restore -c Release
+        
+      - name: Test
+        run: dotnet test --no-build
+        
+  publish:
+    runs-on: ubuntu-latest
+    needs: build
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Authenticate
+        run: echo ${{ secrets.GH_AUTH_TOKEN }} | docker login ${{ env.REGISTRY }} -u ${{ github.actor }} --password-stdin
+        
+      - name: Get version
+        id: version
+        uses: battila7/get-version-action@v2
+        
+      - name: Build coupon service image
+        run: docker build -f NetCore.Microservices.Services.CouponApi/Dockerfile -t ${{ env.IMAGE_PREFIX }}/coupon-service:${{ steps.version.outputs.version-without-v }}
+        
+      - name: Push coupon service image
+        run: docker push ${{ env.IMAGE_PREFIX }}/coupon-service:${{ steps.version.outputs.version-without-v }}
