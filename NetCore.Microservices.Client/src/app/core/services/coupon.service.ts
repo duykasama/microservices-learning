@@ -18,4 +18,8 @@ export class CouponService {
   createCoupon(coupon: any): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(endpoint.CREATE_COUPON, coupon);
   }
+
+  delete(couponId: number): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${endpoint.DELETE_COUPON}/${couponId}`);
+  }
 }

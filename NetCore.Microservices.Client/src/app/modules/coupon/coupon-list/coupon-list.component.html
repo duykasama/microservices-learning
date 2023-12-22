@@ -31,7 +31,7 @@
                         <td>{{ coupon.discountAmount }}</td>
                         <td>{{ coupon.minAmount }}</td>
                         <td class="text-center cursor-pointer">
-                            <fa-icon [icon]="faTrash" class="text-red-500"></fa-icon>
+                            <fa-icon (click)="deleteCoupon(coupon.couponId)" [icon]="faTrash" class="text-red-500"></fa-icon>
                         </td>
                     </tr>
                 </tbody>

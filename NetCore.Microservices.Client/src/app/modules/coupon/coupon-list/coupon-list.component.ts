@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { faPlusSquare, faTrash } from '@fortawesome/free-solid-svg-icons';
@@ -27,6 +28,14 @@ export class CouponListComponent implements OnInit {
         console.log(err);
         
         this.couponsList = [];
+      }
+    });
+  }
+
+  deleteCoupon(couponId: number): void {
+    this.couponService.delete(couponId).subscribe({
+      error: (err: HttpErrorResponse) => {
+        alert(err.message);
       }
     });
   }
