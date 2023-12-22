@@ -7,7 +7,6 @@ import { CouponCreateComponent } from './coupon-create/coupon-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
 @NgModule({
   declarations: [
     CouponListComponent,
@@ -17,7 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CouponRoutingModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class CouponModule { }
