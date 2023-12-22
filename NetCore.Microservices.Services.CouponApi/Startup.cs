@@ -75,15 +75,7 @@ public class Startup
     {
         services.AddCustomSwagger();
         services.AddControllers();
-        // services.AddDefaultCorsPolicy();
-        // CorsSettings corsSettings = Configuration.GetSection("CorsSettings").Get<CorsSettings>() ?? throw new MissingCorsSettingsException();
-        // services.AddCors((Action<CorsOptions>) (options => options.AddPolicy("APP_CORS_POLICY", (Action<CorsPolicyBuilder>) (builder =>
-        // {
-        //     builder.WithOrigins(corsSettings.GetAllowedOriginsArray()).WithHeaders(corsSettings.GetAllowedHeadersArray()).WithMethods(corsSettings.GetAllowedMethodsArray());
-        //     if (corsSettings.AllowCredentials)
-        //         builder.AllowCredentials();
-        //     builder.Build();
-        // }))));
+        services.AddDefaultCorsPolicy();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -92,7 +84,7 @@ public class Startup
         EnsureMigrations();
         
         app.UseSwaggerInEnvironments("Development");
-        app.UseAppCors();
+        app.UseDefaultCorsPolicy();
         app.UseRouting();
         app.UseHttpsRedirection();
         app.UseMiddleware<CorrelationIdHandlerMiddleware>();

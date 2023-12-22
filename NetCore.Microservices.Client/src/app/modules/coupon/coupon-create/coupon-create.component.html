@@ -1,0 +1,21 @@
+<section class="mt-4 border border-white p-4">
+    <h2 class="text-center text-white text-3xl font-semibold pb-2 border-b border-white">Create Coupon</h2>
+    <form [formGroup]="createCouponForm" (ngSubmit)="createCoupon()" class="min-w-[800px] flex flex-col gap-4 justify-center items-center mt-4">
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="couponCode" class="col-span-3 text-gray-400">Coupon Code</label>
+            <input type="text" id="couponCode" formControlName="couponCode" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="couponCode" class="col-span-3 text-gray-400">Discount Amount</label>
+            <input type="text" id="discountAmount" formControlName="discountAmount" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="couponCode" class="col-span-3 text-gray-400">Minimum Amount</label>
+            <input type="text" id="minAmount" formControlName="minAmount" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12">
+            <button type="button" (click)="backToList()" class="bg-slate-700 col-start-4 col-end-8 h-9 rounded text-white">Back to List</button>
+            <button type="submit" class="bg-green-600 col-start-9 col-end-13 h-9 rounded text-white">Create</button>
+        </div>
+    </form>
+</section>
