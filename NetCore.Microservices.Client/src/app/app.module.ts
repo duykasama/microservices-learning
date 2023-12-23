@@ -17,6 +17,7 @@ import { AppState, appState } from './core/store/AppState';
 import { LoginComponent } from './modules/login/login.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { RegisterComponent } from './modules/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { RegisterComponent } from './modules/register/register.component';
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(appState),
   ],
   providers: [

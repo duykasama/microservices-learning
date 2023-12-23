@@ -1,11 +1,11 @@
 <div class="flex flex-col justify-center items-center gap-4 py-4 min-w-[1000px] px-60 mt-4 border border-gray-200">
     <h2 class="text-3xl font-semibold text-gray-300">Register</h2>
-    <form class="flex flex-col justify-center items-center gap-2 w-full">
-        <input type="email" placeholder="Email..." class="rounded h-10 indent-3 w-full">
-        <input type="text" placeholder="Name..." class="rounded h-10 indent-3 w-full">
-        <input type="text" placeholder="Phone Number..." class="rounded h-10 indent-3 w-full">
-        <input type="text" placeholder="Username..." class="rounded h-10 indent-3 w-full">
-        <input type="password" placeholder="Password..." class="rounded h-10 indent-3 w-full">
+    <form [formGroup]="registerForm" (ngSubmit)="register()" class="flex flex-col justify-center items-center gap-2 w-full">
+        <input type="email" autocomplete="email" formControlName="email" placeholder="Email..." class="rounded h-10 indent-3 w-full">
+        <input type="text" autocomplete="name" formControlName="name" placeholder="Name..." class="rounded h-10 indent-3 w-full">
+        <input type="text" autocomplete="mobile" formControlName="phoneNumber" placeholder="Phone Number..." class="rounded h-10 indent-3 w-full">
+        <input type="text" autocomplete="username" formControlName="username" placeholder="Username..." class="rounded h-10 indent-3 w-full">
+        <input type="password" autocomplete="current-password" formControlName="password" placeholder="Password..." class="rounded h-10 indent-3 w-full">
         <button type="submit" class="bg-green-500 rounded w-full h-10 text-white">Regsister</button>
     </form>
 </div>
