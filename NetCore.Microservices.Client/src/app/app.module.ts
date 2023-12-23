@@ -16,6 +16,7 @@ import { StoreModule } from '@ngrx/store';
 import { AppState, appState } from './core/store/AppState';
 import { LoginComponent } from './modules/login/login.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
+import { RegisterComponent } from './modules/register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { NotFoundComponent } from './modules/not-found/not-found.component';
     HomeComponent,
     ToastComponent,
     LoginComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
