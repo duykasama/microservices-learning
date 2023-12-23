@@ -1,14 +1,17 @@
-import { createAction } from "@ngrx/store";
+import { createAction, props } from "@ngrx/store";
+import { SingleToast } from "./toast.reducers";
 
 export enum ToastActionType {
-    SHOW = '[Toast Action] Show toast',
-    HIDE = '[Toast Action] Hide toast',
+    ADD = '[Toast Action] Add toast',
+    REMOVE = '[Toast Action] Remove toast',
 }
 
-export const showToast = createAction(
-    ToastActionType.SHOW
+export const addToast = createAction(
+    ToastActionType.ADD,
+    props<{toast: SingleToast}>()
 )
 
-export const hideToast = createAction(
-    ToastActionType.HIDE
+export const removeToast = createAction(
+    ToastActionType.REMOVE,
+    props<{id: string}>()
 )

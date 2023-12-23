@@ -13,6 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpClientInterceptor } from './core/interceptors/httpClientInterceptor';
 import { ToastComponent } from './components/toast/toast.component';
 import { StoreModule } from '@ngrx/store';
+import { AppState, appState } from './core/store/AppState';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { StoreModule } from '@ngrx/store';
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(appState),
   ],
   providers: [
     {

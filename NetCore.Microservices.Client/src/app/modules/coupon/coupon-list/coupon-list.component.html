@@ -17,7 +17,7 @@
                     <col class="w-[30%]">
                     <col class="w-[10%]">
                 </colgroup>
-                <thead class="border-b border-black">
+                <thead>
                     <tr>
                         <th class="text-start pl-2 py-2">Coupon Code</th>
                         <th class="text-start">Discount Amount</th>
@@ -26,7 +26,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let coupon of couponsList">
+                    <tr *ngFor="let coupon of couponsList" class="border-t border-black">
                         <td class="p-2">{{ coupon.couponCode }}</td>
                         <td>{{ coupon.discountAmount }}</td>
                         <td>{{ coupon.minAmount }}</td>

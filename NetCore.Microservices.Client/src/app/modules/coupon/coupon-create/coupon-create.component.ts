@@ -31,6 +31,7 @@ export class CouponCreateComponent implements OnInit {
 
   createCoupon(): void{
     this.couponService.createCoupon(this.createCouponForm.getRawValue()).subscribe();
+    this.backToList();
   }
 
   backToList(): void {
