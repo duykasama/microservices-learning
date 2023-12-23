@@ -1,4 +1,4 @@
-﻿using NetCore.Microservices.Services.AuthApi.Requests;
+﻿using NetCore.Microservices.Services.AuthApi.Models.Requests;
 using NetCore.WebApiCommon.Api.Models;
 using NetCore.WebApiCommon.Core.Common.Interfaces;
 

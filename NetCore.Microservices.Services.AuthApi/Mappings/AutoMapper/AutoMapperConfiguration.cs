@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using NetCore.Microservices.Services.AuthApi.Domain.Dtos;
 using NetCore.Microservices.Services.AuthApi.Domain.Entities;
-using NetCore.Microservices.Services.AuthApi.Requests;
+using NetCore.Microservices.Services.AuthApi.Models.Requests;
 
 namespace NetCore.Microservices.Services.AuthApi.Mappings.AutoMapper;
 
