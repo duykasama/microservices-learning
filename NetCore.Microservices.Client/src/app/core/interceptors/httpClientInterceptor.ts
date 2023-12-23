@@ -7,7 +7,7 @@ export class HttpClientInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         if (!req.url.includes('http')) {
             req = req.clone({
-                url: environment.API_BASE_URL + endpoint.PREFIX + req.url
+                url: `${environment.API_BASE_URL}/${endpoint.PREFIX}/${req.url}`
             });
         }
 

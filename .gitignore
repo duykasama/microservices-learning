@@ -7,3 +7,4 @@ riderModule.iml
 global.json
 **.DotSettings.user
 GitHub_PAT.txt
+node_modules

@@ -5,7 +5,7 @@
         </div>
         <div class="bg-[#383444] rounded-bl-md rounded-br-md px-4 pb-8">
             <div class="flex justify-end py-4">
-                <div class="text-white flex justify-center items-center gap-2 rounded py-2 px-3 border border-black w-fit cursor-pointer">
+                <div (click)="navigateToCreateCoupon()" class="text-white flex justify-center items-center gap-2 rounded py-2 px-3 border border-black w-fit cursor-pointer">
                     <fa-icon [icon]="faPlusSquare"></fa-icon>
                     <p>Create New Coupon</p>
                 </div>
@@ -17,7 +17,7 @@
                     <col class="w-[30%]">
                     <col class="w-[10%]">
                 </colgroup>
-                <thead class="border-b border-black">
+                <thead>
                     <tr>
                         <th class="text-start pl-2 py-2">Coupon Code</th>
                         <th class="text-start">Discount Amount</th>
@@ -26,12 +26,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let coupon of couponsList">
+                    <tr *ngFor="let coupon of couponsList" class="border-t border-black">
                         <td class="p-2">{{ coupon.couponCode }}</td>
                         <td>{{ coupon.discountAmount }}</td>
                         <td>{{ coupon.minAmount }}</td>
                         <td class="text-center cursor-pointer">
-                            <fa-icon [icon]="faTrash" class="text-red-500"></fa-icon>
+                            <fa-icon (click)="deleteCoupon(coupon.couponId)" [icon]="faTrash" class="text-red-500"></fa-icon>
                         </td>
                     </tr>
                 </tbody>

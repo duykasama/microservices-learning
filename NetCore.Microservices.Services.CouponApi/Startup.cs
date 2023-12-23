@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using Autofac;
 using AutoMapper;
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using NetCore.Microservices.Services.CouponApi.Data;
 using NetCore.Microservices.Services.CouponApi.Implementations.Repositories;
@@ -14,6 +15,8 @@ using NetCore.WebApiCommon.Core.Common.Implementations;
 using NetCore.WebApiCommon.Core.Common.Interfaces;
 using NetCore.WebApiCommon.Core.DAL.Implementations;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
+using NetCore.WebApiCommon.Core.Settings;
+using NetCore.WebApiCommon.Infrastructure.Exceptions;
 using NetCore.WebApiCommon.Infrastructure.Extensions;
 using NetCore.WebApiCommon.Infrastructure.Implementations;
 using ServiceCollectionExtensions = NetCore.WebApiCommon.Infrastructure.Extensions.ServiceCollectionExtensions;
@@ -72,16 +75,7 @@ public class Startup
     {
         services.AddCustomSwagger();
         services.AddControllers();
-        services.AddCors(options =>
-        {
-            options.AddDefaultPolicy(builder =>
-            {
-                builder.WithOrigins("http://localhost:4200")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials();
-            });
-        });
+        services.AddDefaultCorsPolicy();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -90,7 +84,7 @@ public class Startup
         EnsureMigrations();
         
         app.UseSwaggerInEnvironments("Development");
-        app.UseCors();
+        app.UseDefaultCorsPolicy();
         app.UseRouting();
         app.UseHttpsRedirection();
         app.UseMiddleware<CorrelationIdHandlerMiddleware>();
