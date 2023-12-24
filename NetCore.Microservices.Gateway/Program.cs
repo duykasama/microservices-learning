@@ -10,8 +10,15 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
 
 builder.Services.AddOcelot();
 
+builder.Services.AddCors();
+
 var app = builder.Build();
 
-app.UseOcelot();
+app.UseCors(policyBuilder =>
+{
+    policyBuilder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+});
+
+await app.UseOcelot();
 
 app.Run();

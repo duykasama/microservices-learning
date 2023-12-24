@@ -6,7 +6,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/auth/register",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17002"
+        "Host": "localhost",
+        "Port": 17002
       }]
     },
     {
@@ -15,7 +16,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/auth/login",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17002"
+        "Host": "localhost",
+        "Port": 17002
       }]
     },
     {
@@ -24,7 +26,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/auth/assign-role",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17002"
+        "Host": "localhost",
+        "Port": 17002
       }]
     },
     {
@@ -33,7 +36,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/coupon/all",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17001"
+        "Host": "localhost",
+        "Port": 17001
       }]
     },
     {
@@ -42,7 +46,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/coupon/{id}",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17001"
+        "Host": "localhost",
+        "Port": 17001
       }]
     },
     {
@@ -51,7 +56,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/coupon/get-by-code/{code}",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17001"
+        "Host": "localhost",
+        "Port": 17001
       }]
     },
     {
@@ -60,7 +66,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/coupon/create",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17001"
+        "Host": "localhost",
+        "Port": 17001
       }]
     },
     {
@@ -69,7 +76,8 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/coupon/update/{id}",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17001"
+        "Host": "localhost",
+        "Port": 17001
       }]
     },
     {
@@ -78,11 +86,12 @@
       "DownstreamScheme": "https",
       "DownstreamPathTemplate": "api/coupon/delete/{id}",
       "DownstreamHostAndPorts": [{
-        "Host": "https://localhost:17001"
+        "Host": "localhost",
+        "Port": 17001
       }]
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:80"
+    "BaseUrl": "https://localhost:20001"
   }
 }
