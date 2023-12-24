@@ -1,0 +1,44 @@
+version: ${version}
+
+services: 
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-CU18-ubuntu-20.04
+    container_name: mango-db
+    environment:
+      - ACCEPT_EULA=true
+      - MSSQL_SA_PASSWORD=${DB_PASSWORD}
+    networks:
+      - api_database
+    
+  gateway:
+    image: ${DOCKER_REGISTER}/gateway:${version}
+    container_name: mango-gateway
+    ports:
+      - 10000:80
+    networks: 
+      - api_web
+  
+  auth-service:
+    image: ${DOCKER_REGISTRY}/auth-service:${version}
+    container_name: mango-auth-service
+    depends_on: 
+      - db
+    networks: 
+      - api_database
+      - api_web
+  
+  coupon-service:
+    image: ${DOCKER_REGISTRY}/coupon-service:${version}
+    container_name: mango-coupon-service
+    depends_on: 
+      - db
+    networks:
+      - api_database
+      - api_web
+    
+networks:
+  api_database:
+    internal: true
+  api_web:
+    internal: true
+  
