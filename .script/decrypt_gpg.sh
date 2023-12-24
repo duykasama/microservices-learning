@@ -1,6 +1,4 @@
-﻿#!/bin/sh
-
-readonly AUTH_API="NetCore.Microservices.Services.AuthApi"
+﻿readonly AUTH_API="NetCore.Microservices.Services.AuthApi"
 readonly COUPON_API="NetCore.Microservices.Services.CouponApi"
 
 apiList=($AUTH_API $COUPON_API)
