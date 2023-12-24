@@ -8,6 +8,7 @@ on:
 env: 
   REGISTRY: ghcr.io
   IMAGE_PREFIX: ghcr.io/${{ github.actor }}
+  SECRET_PASSPHRASE: ${{ secrets.SECRET_PASSPHRASE }}
 
 jobs:
   build:
