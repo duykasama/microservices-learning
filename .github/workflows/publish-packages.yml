@@ -47,6 +47,9 @@ jobs:
         id: version
         uses: battila7/get-version-action@v2
         
+      - name: Decrypt appsettings files
+        run: sh ./.script/decrypt_gpg.sh
+        
       - name: Build gateway image
         run: docker build -f NetCore.Microservices.Gateway/Dockerfile --build-arg GH_USER_NAME=${{ secrets.GH_USER_NAME }} --build-arg GH_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }} --build-arg GH_NUGET_SOURCE_URL=${{ secrets.GH_NUGET_SOURCE_URL }} -t ${{ env.IMAGE_PREFIX }}/gateway:${{ steps.version.outputs.version-without-v }} .
         
