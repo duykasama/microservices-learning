@@ -1,4 +1,4 @@
-version: ${version}
+version: '1.0.0'
 
 services: 
   db:
@@ -11,7 +11,7 @@ services:
       - api_database
     
   gateway:
-    image: ${DOCKER_REGISTER}/gateway:${version}
+    image: ${DOCKER_REGISTRY}/gateway:${VERSION}
     container_name: mango-gateway
     ports:
       - 10000:80
@@ -19,7 +19,7 @@ services:
       - api_web
   
   auth-service:
-    image: ${DOCKER_REGISTRY}/auth-service:${version}
+    image: ${DOCKER_REGISTRY}/auth-service:${VERSION}
     container_name: mango-auth-service
     depends_on: 
       - db
@@ -28,7 +28,7 @@ services:
       - api_web
   
   coupon-service:
-    image: ${DOCKER_REGISTRY}/coupon-service:${version}
+    image: ${DOCKER_REGISTRY}/coupon-service:${VERSION}
     container_name: mango-coupon-service
     depends_on: 
       - db
