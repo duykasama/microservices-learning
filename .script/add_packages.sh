@@ -13,11 +13,11 @@ readonly CORE_API="NetCore.WebApiCommon.Core.Api"
 readonly INFRASTRUCTURE="NetCore.WebApiCommon.Infrastructure"
 
 
-apiList=($AUTH_API $COUPON_API $EMAIL_API $ORDER_API $PRODUCT_API $REWARD_API $SHOPPING_CART_API)
-packageList=($CORE $CORE_COMMON $CORE_DAL $CORE_API $INFRASTRUCTURE)
+apiList=("$AUTH_API" "$COUPON_API" "$EMAIL_API" "$ORDER_API" "$PRODUCT_API" "$REWARD_API" "$SHOPPING_CART_API")
+packageList=("$CORE" "$CORE_COMMON" "$CORE_DAL" "$CORE_API" "$INFRASTRUCTURE")
 
-for api in ${apiList[@]}; do
-	for packageName in ${packageList[@]}; do
-		(cd ..; dotnet add $api package $packageName)
+for api in "${apiList[@]}"; do
+	for packageName in "${packageList[@]}"; do
+		(cd ..; dotnet add "$api" package "$packageName")
 	done
 done
