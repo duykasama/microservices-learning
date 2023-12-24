@@ -1,3 +1,4 @@
+#! /bin/bash
 readonly AUTH_API="NetCore.Microservices.Services.AuthApi"
 readonly COUPON_API="NetCore.Microservices.Services.CouponApi"
 
