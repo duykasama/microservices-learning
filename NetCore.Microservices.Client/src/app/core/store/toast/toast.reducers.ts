@@ -16,7 +16,7 @@ export interface SingleToast {
 
 const initialState: ToastState = {
     toastList: [],
-    show: true,
+    show: false,
 }
 
 export const toastReducer = createReducer(

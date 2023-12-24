@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using NetCore.Microservices.Services.AuthApi.Interfaces.Services;
-using NetCore.Microservices.Services.AuthApi.Requests;
+using NetCore.Microservices.Services.AuthApi.Models.Requests;
 using NetCore.WebApiCommon.Api.Controllers;
 
 namespace NetCore.Microservices.Services.AuthApi.Controllers;

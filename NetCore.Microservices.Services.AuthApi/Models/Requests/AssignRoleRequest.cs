@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NetCore.Microservices.Services.AuthApi.Requests;
+namespace NetCore.Microservices.Services.AuthApi.Models.Requests;
 
 public class AssignRoleRequest
 {

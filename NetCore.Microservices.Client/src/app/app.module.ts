@@ -14,6 +14,10 @@ import { HttpClientInterceptor } from './core/interceptors/httpClientInterceptor
 import { ToastComponent } from './components/toast/toast.component';
 import { StoreModule } from '@ngrx/store';
 import { AppState, appState } from './core/store/AppState';
+import { LoginComponent } from './modules/login/login.component';
+import { NotFoundComponent } from './modules/not-found/not-found.component';
+import { RegisterComponent } from './modules/register/register.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,10 @@ import { AppState, appState } from './core/store/AppState';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    ToastComponent
+    ToastComponent,
+    LoginComponent,
+    NotFoundComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +37,7 @@ import { AppState, appState } from './core/store/AppState';
     AppRoutingModule,
     FontAwesomeModule,
     HttpClientModule,
+    ReactiveFormsModule,
     StoreModule.forRoot(appState),
   ],
   providers: [

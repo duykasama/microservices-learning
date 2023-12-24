@@ -45,7 +45,7 @@ public class CouponController : BaseController
         return ExecuteApiAsync(() => _couponService.UpdateCouponAsync(id, Guid.Empty, dtoCoupon));
     }
     
-    [HttpDelete("{id:int}")]
+    [HttpDelete("delete/{id:int}")]
     public Task<IActionResult> DeleteCoupon(int id)
     {
         return ExecuteApiAsync(() => _couponService.DeleteCouponAsync(id));

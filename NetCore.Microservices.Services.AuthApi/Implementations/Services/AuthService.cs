@@ -6,7 +6,8 @@ using NetCore.Microservices.Services.AuthApi.Domain.Entities;
 using NetCore.Microservices.Services.AuthApi.Exceptions;
 using NetCore.Microservices.Services.AuthApi.Interfaces.Repositories;
 using NetCore.Microservices.Services.AuthApi.Interfaces.Services;
-using NetCore.Microservices.Services.AuthApi.Requests;
+using NetCore.Microservices.Services.AuthApi.Models.Requests;
+using NetCore.Microservices.Services.AuthApi.Models.Responses;
 using NetCore.WebApiCommon.Api.Models;
 using NetCore.WebApiCommon.Infrastructure.Implementations;
 using InvalidCredentialException = NetCore.Microservices.Services.AuthApi.Exceptions.InvalidCredentialException;
@@ -59,7 +60,13 @@ public class AuthService : GenericService, IAuthService
             throw new InvalidCredentialException("Invalid password");
         }
 
-        return new ApiActionResult(true) { Data = _jwtService.GenerateToken(user) };
+        var tokenResponse = new TokenResponse
+        {
+            AccessToken = _jwtService.GenerateToken(user),
+            ExpiresAt = DateTimeOffset.Now.AddHours(1)
+        };
+
+        return new ApiActionResult(true) { Data = tokenResponse };
     }
 
     public async Task<ApiActionResult> AssignRole(string email, string roleName)
