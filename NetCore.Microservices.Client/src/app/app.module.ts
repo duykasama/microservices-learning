@@ -18,6 +18,8 @@ import { LoginComponent } from './modules/login/login.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { RegisterComponent } from './modules/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TestToastComponent } from './modules/test-toast/test-toast.component';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ToastComponent,
     LoginComponent,
     NotFoundComponent,
-    RegisterComponent
+    RegisterComponent,
+    TestToastComponent
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     ReactiveFormsModule,
     StoreModule.forRoot(appState),
+    EffectsModule.forRoot(),
   ],
   providers: [
     {
