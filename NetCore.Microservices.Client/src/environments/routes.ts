@@ -4,5 +4,6 @@ export const route = {
     COUPON_LIST: 'coupon-list',
     COUPON_CREATE: 'coupon-create',
     LOGIN: 'login',
+    LOGOUT: 'logout',
     REGISTER: 'register'
 }

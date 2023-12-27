@@ -13,7 +13,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpClientInterceptor } from './core/interceptors/httpClientInterceptor';
 import { ToastComponent } from './components/toast/toast.component';
 import { StoreModule } from '@ngrx/store';
-import { AppState, appState } from './core/store/AppState';
+import { appState } from './core/store/AppState';
 import { LoginComponent } from './modules/login/login.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { RegisterComponent } from './modules/register/register.component';
@@ -32,7 +32,7 @@ import { EffectsModule } from '@ngrx/effects';
     LoginComponent,
     NotFoundComponent,
     RegisterComponent,
-    TestToastComponent
+    TestToastComponent,
   ],
   imports: [
     BrowserModule,

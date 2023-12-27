@@ -2,10 +2,13 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { ApiResponse } from 'src/app/core/models/api-response.model';
 import { TokenType } from 'src/app/core/models/tokens.enum';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { ToastService } from 'src/app/core/services/toast.service';
+import { AppState } from 'src/app/core/store/AppState';
+import { login } from 'src/app/core/store/user/user.actions';
 import { route } from 'src/environments/routes';
 
 @Component({
@@ -30,6 +33,7 @@ export class LoginComponent {
       next: (response: ApiResponse) => {
         localStorage.setItem(TokenType.ACCESS_TOKEN, response.data?.accessToken);
         localStorage.setItem(TokenType.REFRESH_TOKEN, response.data?.refreshToken);
+        this.store$.dispatch(login({username: 'Duy'}))
         this.router.navigateByUrl(route.EMPTY);
       },
       error: (err: HttpErrorResponse) => {
@@ -44,6 +48,7 @@ export class LoginComponent {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private store$: Store<AppState>
   ) { }
 }
