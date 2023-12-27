@@ -5,6 +5,7 @@ import { LayoutComponent } from './layout/layout.component';
 import { LoginComponent } from './modules/login/login.component';
 import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { RegisterComponent } from './modules/register/register.component';
+import { TestToastComponent } from './modules/test-toast/test-toast.component';
 
 const routes: Routes = [
   {
@@ -26,7 +27,11 @@ const routes: Routes = [
       {
         path: 'coupon',
         loadChildren: () => import('./modules/coupon/coupon.module').then(m => m.CouponModule)
-      }
+      },
+      {
+        path: 'test',
+        component: TestToastComponent
+      },
     ]
   },
   {

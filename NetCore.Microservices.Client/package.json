@@ -23,7 +23,9 @@
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-regular-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "@ngrx/effects": "^16.3.0",
     "@ngrx/store": "^16.3.0",
+    "guid-typescript": "^1.0.9",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

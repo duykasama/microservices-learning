@@ -7,12 +7,17 @@
             <li class="border-l border-gray-500 px-2 py-2">Content Management</li>
         </ul>
     </nav>
-    <div class="flex items-center border-x border-black">
+    <div *ngIf="isLoggedIn | async" class="flex items-center border-x border-black">
+        <div class="flex justify-center items-center h-full px-2">
+            <button (click)="logout()">Logout</button>
+        </div>
+    </div>
+    <div *ngIf="!(isLoggedIn | async)" class="flex items-center border-x border-black">
         <div class="flex justify-center items-center border-r border-gray-500 h-full px-2">
-            <a routerLink="/login">Login</a>
+            <a [routerLink]="route.LOGIN">Login</a>
         </div>
         <div class="flex justify-center items-center h-full px-2">
-            <a routerLink="/register">Register</a>
+            <a [routerLink]="route.REGISTER">Register</a>
         </div>
     </div>
 </header>
