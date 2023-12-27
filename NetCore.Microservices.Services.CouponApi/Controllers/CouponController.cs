@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NetCore.Microservices.Services.CouponApi.Constants;
 using NetCore.Microservices.Services.CouponApi.Domain.Dtos;
 using NetCore.Microservices.Services.CouponApi.Interfaces.Services;
 using NetCore.WebApiCommon.Api.Controllers;
@@ -6,6 +8,7 @@ using NetCore.WebApiCommon.Api.Controllers;
 namespace NetCore.Microservices.Services.CouponApi.Controllers;
 
 [Route("api/[controller]")]
+[Authorize]
 public class CouponController : BaseController
 {
     private readonly ICouponService _couponService;
@@ -33,18 +36,21 @@ public class CouponController : BaseController
         return ExecuteApiAsync(() => _couponService.GetCouponByCode(code));
     }
     
+    [Authorize(Roles = UserRole.ADMIN)]
     [HttpPost("create")]
     public Task<IActionResult> CreateCoupon(DtoCoupon coupon)
     {
         return ExecuteApiAsync(() => _couponService.CreateCouponAsync(coupon));
     }
     
+    [Authorize(Roles = UserRole.ADMIN)]
     [HttpPut("update/{id:int}")]
     public Task<IActionResult> UpdateCoupon(int id, DtoCoupon dtoCoupon)
     {
         return ExecuteApiAsync(() => _couponService.UpdateCouponAsync(id, Guid.Empty, dtoCoupon));
     }
     
+    [Authorize(Roles = UserRole.ADMIN)]
     [HttpDelete("delete/{id:int}")]
     public Task<IActionResult> DeleteCoupon(int id)
     {

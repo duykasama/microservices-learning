@@ -76,6 +76,7 @@ public class Startup
         services.AddCustomSwagger();
         services.AddControllers();
         services.AddDefaultCorsPolicy();
+        services.AddJwtAuthentication();
     }
 
     public void Configure(IApplicationBuilder app)
@@ -87,6 +88,8 @@ public class Startup
         app.UseDefaultCorsPolicy();
         app.UseRouting();
         app.UseHttpsRedirection();
+        app.UseAuthentication();
+        app.UseAuthorization();
         app.UseMiddleware<CorrelationIdHandlerMiddleware>();
         app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
         app.UseEndpoints(endpoints => endpoints.MapControllers());
