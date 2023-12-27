@@ -5,5 +5,5 @@ namespace NetCore.Microservices.Services.AuthApi.Interfaces.Services;
 
 public interface IJwtService : IBaseService
 {
-    string GenerateToken(ApplicationUser user);
+    string GenerateToken(ApplicationUser user, IEnumerable<string> roles);
 }

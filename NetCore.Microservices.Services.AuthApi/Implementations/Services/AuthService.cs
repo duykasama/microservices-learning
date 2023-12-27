@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
+using NetCore.Microservices.Services.AuthApi.Constants;
 using NetCore.Microservices.Services.AuthApi.Domain.Dtos;
 using NetCore.Microservices.Services.AuthApi.Domain.Entities;
 using NetCore.Microservices.Services.AuthApi.Exceptions;
@@ -60,9 +61,10 @@ public class AuthService : GenericService, IAuthService
             throw new InvalidCredentialException("Invalid password");
         }
 
+        var roles = await _userManager.GetRolesAsync(user);
         var tokenResponse = new TokenResponse
         {
-            AccessToken = _jwtService.GenerateToken(user),
+            AccessToken = _jwtService.GenerateToken(user, roles),
             ExpiresAt = DateTimeOffset.Now.AddHours(1)
         };
 

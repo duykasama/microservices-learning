@@ -9,8 +9,9 @@ public class UserRegisterRequest
     
     [Required]
     public string Name { get; set; } = null!;
-    
-    public string PhoneNumber { get; set; }
+
+    [Required] 
+    public string PhoneNumber { get; set; } = null!;
     
     [Required]
     public string Password { get; set; } = null!;
