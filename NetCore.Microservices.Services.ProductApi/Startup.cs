@@ -52,8 +52,8 @@ public class Startup
         var mapper = config.CreateMapper();
         builder.RegisterInstance(mapper).As<IMapper>();
 
-        var scope = builder.Build().BeginLifetimeScope();
-        DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
+        // var scope = builder.Build().BeginLifetimeScope();
+        // DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
     }
     
     public void ConfigureServices(IServiceCollection services)
