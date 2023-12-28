@@ -1,25 +1,27 @@
-var builder = WebApplication.CreateBuilder(args);
+using Autofac.Extensions.DependencyInjection;
+using NetCore.Microservices.Services.ProductApi;
+using NetCore.WebApiCommon.Core.Common.Models;
+using NLog;
 
-// Add services to the container.
+GlobalData.ModuleName = AppDomain.CurrentDomain.FriendlyName;
+GlobalData.CurrentEnvironment = "Development";
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+LogManager.Setup()
+    .LoadConfigurationFromFile($"{Directory.GetCurrentDirectory()}/Configurations/nlog.config")
+    .GetCurrentClassLogger();
 
-var app = builder.Build();
+#region Create host with startup class
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+var host = Host.CreateDefaultBuilder(args)
+    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureWebHostDefaults(builder =>
+    {
+        builder.UseStartup<Startup>();
+    })
+    .Build();
 
-app.UseHttpsRedirection();
+host.Run();
 
-app.UseAuthorization();
+#endregion
 
-app.MapControllers();
-
-app.Run();
+LogManager.Shutdown();

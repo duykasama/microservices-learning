@@ -1,27 +1,20 @@
 ﻿using System.Reflection;
 using Autofac;
 using AutoMapper;
-using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
-using NetCore.Microservices.Services.CouponApi.Data;
-using NetCore.Microservices.Services.CouponApi.Implementations.Repositories;
-using NetCore.Microservices.Services.CouponApi.Implementations.Services;
-using NetCore.Microservices.Services.CouponApi.Interfaces.Repositories;
-using NetCore.Microservices.Services.CouponApi.Interfaces.Services;
-using NetCore.Microservices.Services.CouponApi.Mappings.AutoMapper;
+using NetCore.Microservices.Services.ProductApi.Data;
+using NetCore.Microservices.Services.ProductApi.Mappings.AutoMapper;
 using NetCore.WebApiCommon.Api.Middlewares;
 using NetCore.WebApiCommon.Core.Common.Helpers;
 using NetCore.WebApiCommon.Core.Common.Implementations;
 using NetCore.WebApiCommon.Core.Common.Interfaces;
 using NetCore.WebApiCommon.Core.DAL.Implementations;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
-using NetCore.WebApiCommon.Core.Settings;
-using NetCore.WebApiCommon.Infrastructure.Exceptions;
 using NetCore.WebApiCommon.Infrastructure.Extensions;
 using NetCore.WebApiCommon.Infrastructure.Implementations;
 using ServiceCollectionExtensions = NetCore.WebApiCommon.Infrastructure.Extensions.ServiceCollectionExtensions;
 
-namespace NetCore.Microservices.Services.CouponApi;
+namespace NetCore.Microservices.Services.ProductApi;
 
 public class Startup
 {
@@ -47,28 +40,20 @@ public class Startup
             .As<ICorrelationIdGenerator>()
             .InstancePerLifetimeScope();
         
-        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponDbContext))!)
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductDbContext))!)
             .As<IAppDbContext>()
             .InstancePerLifetimeScope();
         
         builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(UnitOfWork))!)
             .As<IUnitOfWork>()
             .InstancePerLifetimeScope();
-        
-        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponRepository))!)
-            .As<ICouponRepository>()
-            .InstancePerLifetimeScope();
-        
-        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponService))!)
-            .As<ICouponService>()
-            .InstancePerLifetimeScope();
 
         var config = new MapperConfiguration(AutoMapperConfiguration.RegisterMaps);
         var mapper = config.CreateMapper();
         builder.RegisterInstance(mapper).As<IMapper>();
 
-        // var scope = builder.Build().BeginLifetimeScope();
-        // DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
+        var scope = builder.Build().BeginLifetimeScope();
+        DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
     }
     
     public void ConfigureServices(IServiceCollection services)
@@ -97,10 +82,10 @@ public class Startup
 
     private void EnsureMigrations()
     {
-        if (DependencyInjectionHelper.ResolveService<IAppDbContext>() is CouponDbContext couponDbContext 
-            && couponDbContext.Database.GetPendingMigrations().Any())
+        if (DependencyInjectionHelper.ResolveService<IAppDbContext>() is ProductDbContext productDbContext 
+            && productDbContext.Database.GetPendingMigrations().Any())
         {
-            couponDbContext.Database.Migrate();
+            productDbContext.Database.Migrate();
         }
     }
 }
