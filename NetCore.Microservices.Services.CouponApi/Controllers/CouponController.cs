@@ -19,41 +19,53 @@ public class CouponController : BaseController
     }
 
     [HttpGet("all")]
-    public Task<IActionResult> GetAllCoupons()
+    public async Task<IActionResult> GetAllCoupons()
     {
-        return ExecuteApiAsync(() => _couponService.GetAllCouponsAsync());
+        return await ExecuteApiAsync(
+            async () => await _couponService.GetAllCouponsAsync().ConfigureAwait(false)
+        ).ConfigureAwait(false);
     }
 
     [HttpGet("{id:int}")]
-    public Task<IActionResult> GetCouponById(int id)
+    public async Task<IActionResult> GetCouponById(int id)
     {
-        return ExecuteApiAsync(() => _couponService.GetCouponById(id));
+        return await ExecuteApiAsync(
+            async () => await _couponService.GetCouponById(id).ConfigureAwait(false)
+        ).ConfigureAwait(false);
     }
     
     [HttpGet("get-by-code/{code}")]
-    public Task<IActionResult> GetCouponByCode(string code)
+    public async Task<IActionResult> GetCouponByCode(string code)
     {
-        return ExecuteApiAsync(() => _couponService.GetCouponByCode(code));
+        return await ExecuteApiAsync(
+            async () => await _couponService.GetCouponByCode(code).ConfigureAwait(false)
+        ).ConfigureAwait(false);
     }
     
     [Authorize(Roles = UserRole.ADMIN)]
     [HttpPost("create")]
-    public Task<IActionResult> CreateCoupon(DtoCoupon coupon)
+    public async Task<IActionResult> CreateCoupon(DtoCoupon coupon)
     {
-        return ExecuteApiAsync(() => _couponService.CreateCouponAsync(coupon));
+        return await ExecuteApiAsync(
+            async () => await _couponService.CreateCouponAsync(coupon).ConfigureAwait(false)
+        ).ConfigureAwait(false);
     }
     
     [Authorize(Roles = UserRole.ADMIN)]
     [HttpPut("update/{id:int}")]
-    public Task<IActionResult> UpdateCoupon(int id, DtoCoupon dtoCoupon)
+    public async Task<IActionResult> UpdateCoupon(int id, DtoCoupon dtoCoupon)
     {
-        return ExecuteApiAsync(() => _couponService.UpdateCouponAsync(id, Guid.Empty, dtoCoupon));
+        return await ExecuteApiAsync(
+            async () => await _couponService.UpdateCouponAsync(id, Guid.Empty, dtoCoupon).ConfigureAwait(false)
+        ).ConfigureAwait(false);
     }
     
     [Authorize(Roles = UserRole.ADMIN)]
     [HttpDelete("delete/{id:int}")]
-    public Task<IActionResult> DeleteCoupon(int id)
+    public async Task<IActionResult> DeleteCoupon(int id)
     {
-        return ExecuteApiAsync(() => _couponService.DeleteCouponAsync(id));
+        return await ExecuteApiAsync(
+            async () => await _couponService.DeleteCouponAsync(id).ConfigureAwait(false)
+        ).ConfigureAwait(false);
     }
 }
