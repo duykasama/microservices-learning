@@ -1,0 +1,44 @@
+<section class="flex justify-center py-6">
+    <div class="flex flex-col w-[1500px] shadow-md shadow-gray-900">
+        <div class="bg-[#6b7d80] py-5 text-3xl font-semibold text-white rounded-tl-md rounded-tr-md">
+            <h2 class="text-center">Products List</h2>
+        </div>
+        <div class="bg-[#383444] rounded-bl-md rounded-br-md px-4 pb-8">
+            <div class="flex justify-end py-4">
+                <div (click)="navigateToCreateProduct()" class="text-white flex justify-center items-center gap-2 rounded py-2 px-3 border border-black w-fit cursor-pointer">
+                    <fa-icon [icon]="faPlusSquare"></fa-icon>
+                    <p>Create New Product</p>
+                </div>
+            </div>
+            <table class="w-full bg-[#3d424b] text-white">
+                <colgroup>
+                    <col class="w-[30%] pl-2">
+                    <col class="w-[30%]">
+                    <col class="w-[30%]">
+                    <col class="w-[10%]">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th class="text-start pl-2 py-2">Name</th>
+                        <th class="text-start">Category Name</th>
+                        <th class="text-start">Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of productList" class="border-t border-black">
+                        <td class="p-2">{{ product.name }}</td>
+                        <td>{{ product.categoryName }}</td>
+                        <td>{{ product.price }}</td>
+                        <td >
+                            <div class="flex justify-center items-center gap-4">
+                                <fa-icon (click)="updateProduct(product.productId)" [icon]="faPenToSquare" class="text-green-500 cursor-pointer text-xl"></fa-icon>
+                                <fa-icon (click)="deleteProduct(product.productId)" [icon]="faTrash" class="text-red-500 cursor-pointer text-xl"></fa-icon>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
