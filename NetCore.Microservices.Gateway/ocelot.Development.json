@@ -41,20 +41,20 @@
       }]
     },
     {
-      "UpstreamPathTemplate": "/api/coupon/{id}",
+      "UpstreamPathTemplate": "/api/coupon/{everything}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/coupon/{id}",
+      "DownstreamPathTemplate": "/api/coupon/{everything}",
       "DownstreamHostAndPorts": [{
         "Host": "localhost",
         "Port": 17001
       }]
     },
     {
-      "UpstreamPathTemplate": "/api/coupon/get-by-code/{code}",
+      "UpstreamPathTemplate": "/api/coupon/get-by-code/{everything}",
       "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/coupon/get-by-code/{code}",
+      "DownstreamPathTemplate": "/api/coupon/get-by-code/{everything}",
       "DownstreamHostAndPorts": [{
         "Host": "localhost",
         "Port": 17001
@@ -71,23 +71,73 @@
       }]
     },
     {
-      "UpstreamPathTemplate": "/api/coupon/update/{id}",
+      "UpstreamPathTemplate": "/api/coupon/update/{everything}",
       "UpstreamHttpMethod": [ "Put" ],
       "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/coupon/update/{id}",
+      "DownstreamPathTemplate": "/api/coupon/update/{everything}",
       "DownstreamHostAndPorts": [{
         "Host": "localhost",
         "Port": 17001
       }]
     },
     {
-      "UpstreamPathTemplate": "/api/coupon/delete/{id}",
+      "UpstreamPathTemplate": "/api/coupon/delete/{everything}",
       "UpstreamHttpMethod": [ "Delete" ],
       "DownstreamScheme": "https",
-      "DownstreamPathTemplate": "/api/coupon/delete/{id}",
+      "DownstreamPathTemplate": "/api/coupon/delete/{everything}",
       "DownstreamHostAndPorts": [{
         "Host": "localhost",
         "Port": 17001
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/api/product/all",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product/all",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 17000
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/api/product/{everything}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product/{everything}",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 17000
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/api/product/create",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product/create",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 17000
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/api/product/update/{everything}",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product/update/{everything}",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 17000
+      }]
+    },
+    {
+      "UpstreamPathTemplate": "/api/product/delete/{everything}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/product/delete/{everything}",
+      "DownstreamHostAndPorts": [{
+        "Host": "localhost",
+        "Port": 17000
       }]
     }
   ],
