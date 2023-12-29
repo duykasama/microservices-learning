@@ -3,6 +3,10 @@ using Autofac;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NetCore.Microservices.Services.ProductApi.Data;
+using NetCore.Microservices.Services.ProductApi.Implementations.Repositories;
+using NetCore.Microservices.Services.ProductApi.Implementations.Services;
+using NetCore.Microservices.Services.ProductApi.Interfaces.Repositories;
+using NetCore.Microservices.Services.ProductApi.Interfaces.Services;
 using NetCore.Microservices.Services.ProductApi.Mappings.AutoMapper;
 using NetCore.WebApiCommon.Api.Middlewares;
 using NetCore.WebApiCommon.Core.Common.Helpers;
@@ -42,6 +46,14 @@ public class Startup
         
         builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductDbContext))!)
             .As<IAppDbContext>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductRepository))!)
+            .As<IProductRepository>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductService))!)
+            .As<IProductService>()
             .InstancePerLifetimeScope();
         
         builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(UnitOfWork))!)
