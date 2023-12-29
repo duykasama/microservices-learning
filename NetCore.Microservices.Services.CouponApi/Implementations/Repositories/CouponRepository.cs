@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using NetCore.Microservices.Services.CouponApi.Domain.Entities;
-using NetCore.Microservices.Services.CouponApi.Implementations.Services;
 using NetCore.Microservices.Services.CouponApi.Interfaces.Repositories;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
 
