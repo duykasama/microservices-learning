@@ -3,6 +3,10 @@ using Autofac;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using NetCore.Microservices.Services.ProductApi.Data;
+using NetCore.Microservices.Services.ProductApi.Implementations.Repositories;
+using NetCore.Microservices.Services.ProductApi.Implementations.Services;
+using NetCore.Microservices.Services.ProductApi.Interfaces.Repositories;
+using NetCore.Microservices.Services.ProductApi.Interfaces.Services;
 using NetCore.Microservices.Services.ProductApi.Mappings.AutoMapper;
 using NetCore.WebApiCommon.Api.Middlewares;
 using NetCore.WebApiCommon.Core.Common.Helpers;
@@ -44,6 +48,14 @@ public class Startup
             .As<IAppDbContext>()
             .InstancePerLifetimeScope();
         
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductRepository))!)
+            .As<IProductRepository>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductService))!)
+            .As<IProductService>()
+            .InstancePerLifetimeScope();
+        
         builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(UnitOfWork))!)
             .As<IUnitOfWork>()
             .InstancePerLifetimeScope();
@@ -52,8 +64,8 @@ public class Startup
         var mapper = config.CreateMapper();
         builder.RegisterInstance(mapper).As<IMapper>();
 
-        var scope = builder.Build().BeginLifetimeScope();
-        DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
+        // var scope = builder.Build().BeginLifetimeScope();
+        // DependencyInjectionHelper.InitProvider(scope.Resolve<IDependencyProvider>());
     }
     
     public void ConfigureServices(IServiceCollection services)
