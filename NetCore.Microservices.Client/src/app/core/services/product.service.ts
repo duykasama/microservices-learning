@@ -13,11 +13,15 @@ export class ProductService {
     return this.http.get<ApiResponse>(endpoint.ALL_PRODUCTS);
   }
 
+  getProductById(id: number): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${endpoint.PRODUCT}/${id}`);
+  }
+
   createProduct(product: any): Observable<ApiResponse> {
     return this.http.post<ApiResponse>(endpoint.CREATE_PRODUCT, product);
   }
 
-  udpateProduct(product: any, id: number): Observable<ApiResponse> {
+  updateProduct(product: any, id: number): Observable<ApiResponse> {
     return this.http.put<ApiResponse>(`${endpoint.UPDATE_PRODUCT}/${id}`, product);
   }
 

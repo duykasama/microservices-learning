@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { faUnderline } from '@fortawesome/free-solid-svg-icons';
+import { Subject, takeUntil } from 'rxjs';
+import { ApiResponse } from 'src/app/core/models/api-response.model';
+import { Product } from 'src/app/core/models/product.model';
 import { ProductService } from 'src/app/core/services/product.service';
 import { ToastService } from 'src/app/core/services/toast.service';
 import { route } from 'src/environments/routes';
@@ -10,18 +12,50 @@ import { route } from 'src/environments/routes';
   selector: 'app-product-create',
   templateUrl: './product-create.component.html',
 })
-export class ProductCreateComponent {
+export class ProductCreateComponent implements OnInit, OnDestroy {
+
+  destroy$: Subject<void> = new Subject<void>();
+  isUpdating: boolean = true;
+  productId: number = 0;
 
   createProductForm = this.formBuilder.group({
-    name: new FormControl(''),
+    name: new FormControl('', [
+      Validators.min(0),
+      Validators.max(1000)
+    ]),
     categoryName: new FormControl(''),
     description: new FormControl(''),
     price: new FormControl(0),
     imageUrl: new FormControl('')
   });
 
-  createProduct(): void {
-    this.productService.createProduct(this.createProductForm.getRawValue()).subscribe();
+  ngOnInit(): void {
+    this.isUpdating = this.router.url.includes(route.PRODUCT_UPDATE);
+    if (this.isUpdating) {
+      const productIdStr: string = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
+      this.productId = Number.parseInt(productIdStr);
+      this.productService.getProductById(this.productId)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe((res: ApiResponse) => {
+          const product = res.data as Product;
+          this.createProductForm.get('name')?.setValue(product.name);
+          this.createProductForm.get('categoryName')?.setValue(product.categoryName);
+          this.createProductForm.get('description')?.setValue(product.description);
+          this.createProductForm.get('price')?.setValue(product.price);
+          this.createProductForm.get('imageUrl')?.setValue(product.imageUrl);
+        });      
+    }
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  submitForm(): void {
+    this.isUpdating 
+    ? this.productService.updateProduct(this.createProductForm.getRawValue(), this.productId).pipe(takeUntil(this.destroy$)).subscribe()
+    : this.productService.createProduct(this.createProductForm.getRawValue()).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   backToList(): void {

@@ -18,6 +18,10 @@ const productRoutes: Routes = [
   {
     path: route.PRODUCT_CREATE,
     component: ProductCreateComponent
+  },
+  {
+    path: `${route.PRODUCT_UPDATE}/:everything`,
+    component: ProductCreateComponent
   }
 ]
 
