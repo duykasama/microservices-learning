@@ -1,0 +1,30 @@
+<section class="mt-4 border border-white p-4
+">
+    <h2 class="text-center text-white text-3xl font-semibold pb-2 border-b border-white">{{ isUpdating ? 'Update Product' : 'Create Product' }}</h2>
+    <form [formGroup]="createProductForm" (ngSubmit)="submitForm()" class="min-w-[800px] flex flex-col gap-4 justify-center items-center mt-4">
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="name" class="col-span-3 text-gray-400">Name</label>
+            <input type="text" id="name" formControlName="name" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="categoryName" class="col-span-3 text-gray-400">Category Name</label>
+            <input type="text" id="categoryName" formControlName="categoryName" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12">
+            <label for="description" class="col-span-3 text-gray-400">Description</label>
+            <textarea id="description" formControlName="description" rows="5" class="col-span-9 rounded pl-3"></textarea>
+        </div>
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="price" class="col-span-3 text-gray-400">Price</label>
+            <input type="number" id="price" formControlName="price" min="0" max="1000" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12 items-center">
+            <label for="imageUrl" class="col-span-3 text-gray-400">Image Url</label>
+            <input type="text" id="imageUrl" formControlName="imageUrl" class="col-span-9 h-9 rounded pl-3">
+        </div>
+        <div class="w-full grid grid-cols-12">
+            <button type="button" (click)="backToList()" class="bg-slate-700 col-start-4 col-end-8 h-9 rounded text-white">Back to List</button>
+            <button type="submit" class="bg-green-600 col-start-9 col-end-13 h-9 rounded text-white">{{ isUpdating ? 'Update' : 'Create'}}</button>
+        </div>
+    </form>
+</section>

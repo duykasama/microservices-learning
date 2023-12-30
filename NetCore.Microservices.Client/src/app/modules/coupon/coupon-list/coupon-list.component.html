@@ -30,8 +30,8 @@
                         <td class="p-2">{{ coupon.couponCode }}</td>
                         <td>{{ coupon.discountAmount }}</td>
                         <td>{{ coupon.minAmount }}</td>
-                        <td class="text-center cursor-pointer">
-                            <fa-icon (click)="deleteCoupon(coupon.couponId)" [icon]="faTrash" class="text-red-500"></fa-icon>
+                        <td class="text-center">
+                            <fa-icon (click)="deleteCoupon(coupon.couponId)" [icon]="faTrash" class="text-red-500 cursor-pointer"></fa-icon>
                         </td>
                     </tr>
                 </tbody>

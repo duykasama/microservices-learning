@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using NetCore.Microservices.Services.AuthApi.Constants;
 using NetCore.Microservices.Services.AuthApi.Domain.Dtos;
 using NetCore.Microservices.Services.AuthApi.Domain.Entities;
 using NetCore.Microservices.Services.AuthApi.Exceptions;

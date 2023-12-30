@@ -1,4 +1,5 @@
 import { createAction, props } from "@ngrx/store";
+import { UserState } from "./user.reducers";
 
 export enum UserActionType {
     LOGIN = '[User Action] Login',
@@ -6,8 +7,7 @@ export enum UserActionType {
 }
 
 export const login = createAction(
-    UserActionType.LOGIN,
-    props<{username: string}>()
+    UserActionType.LOGIN
 );
 
 export const logout = createAction(

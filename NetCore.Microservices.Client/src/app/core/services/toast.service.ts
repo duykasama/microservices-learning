@@ -18,7 +18,7 @@ export class ToastService {
     this.displayToast(content, title, 'error');
   }
   
-  displayToast(content: string, title: string, status: 'success' | 'warning' | 'error'): void {
+  private displayToast(content: string, title: string, status: 'success' | 'warning' | 'error'): void {
     const id: string = Guid.create().toString();
     const toast: SingleToast = {
       id,

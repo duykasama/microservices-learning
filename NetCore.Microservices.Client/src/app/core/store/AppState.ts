@@ -4,7 +4,7 @@ import { UserState, userReducer } from "./user/user.reducers";
 
 export interface AppState {
     toastReducer: ActionReducer<ToastState>,
-    userReducer: ActionReducer<UserState>
+    userReducer: ActionReducer<UserState>,
 }
 
 export const appState: AppState = {
