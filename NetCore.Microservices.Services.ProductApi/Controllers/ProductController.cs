@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NetCore.Microservices.Services.ProductApi.Constants;
 using NetCore.Microservices.Services.ProductApi.Domain.Dtos;
 using NetCore.Microservices.Services.ProductApi.Interfaces.Services;
+using NetCore.Microservices.Services.ProductApi.Models.Requests;
 using NetCore.WebApiCommon.Api.Controllers;
 
 namespace NetCore.Microservices.Services.ProductApi.Controllers;
@@ -45,10 +46,10 @@ public class ProductController : BaseController
     
     [Authorize(Roles = UserRole.ADMIN)]
     [HttpPut("update/{id:int}")]
-    public async Task<IActionResult> UpdateProduct(int id, DtoProduct dtoProduct)
+    public async Task<IActionResult> UpdateProduct(int id, ProductUpdateRequest request)
     {
         return await ExecuteApiAsync(
-            async () => await _productService.UpdateProductAsync(id, Guid.Empty, dtoProduct).ConfigureAwait(false)
+            async () => await _productService.UpdateProductAsync(id, Guid.Empty, request).ConfigureAwait(false)
         ).ConfigureAwait(false);
     }
     

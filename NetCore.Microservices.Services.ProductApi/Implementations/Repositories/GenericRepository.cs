@@ -36,12 +36,12 @@ public abstract class GenericRepository<T, TKey> : IRepository<T, TKey> where T 
 
     public void Update(T entity)
     {
-        _dbContext.CreateSet<T, TKey>().Entry(entity).State = EntityState.Modified;
+        _dbContext.Update<T, TKey>(entity);
     }
 
     public Task UpdateAsync(T entity)
     {
-        _dbContext.CreateSet<T, TKey>().Entry(entity).State = EntityState.Modified;
+        _dbContext.Update<T, TKey>(entity);
         return Task.CompletedTask;
     }
 
