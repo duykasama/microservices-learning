@@ -7,6 +7,7 @@ import { NotFoundComponent } from './modules/not-found/not-found.component';
 import { RegisterComponent } from './modules/register/register.component';
 import { TestToastComponent } from './modules/test-toast/test-toast.component';
 import { route } from 'src/environments/routes';
+import { AuthGuard } from './core/guards/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -27,10 +28,12 @@ const routes: Routes = [
       },
       {
         path: route.COUPON,
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/coupon/coupon.module').then(m => m.CouponModule)
       },
       {
         path: route.PRODUCT,
+        canActivate: [AuthGuard],
         loadChildren: () => import('./modules/product/product.module').then(m => m.ProductModule)
       },
       {

@@ -7,6 +7,7 @@ export const endpoint = {
     //#endregion
 
     //#region Product Endpoints
+    PRODUCT: 'product',
     ALL_PRODUCTS: 'product/all',
     CREATE_PRODUCT: 'product/create',
     UPDATE_PRODUCT: 'product/update',

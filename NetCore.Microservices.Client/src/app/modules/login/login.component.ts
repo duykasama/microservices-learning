@@ -33,7 +33,7 @@ export class LoginComponent {
       next: (response: ApiResponse) => {
         localStorage.setItem(TokenType.ACCESS_TOKEN, response.data?.accessToken);
         localStorage.setItem(TokenType.REFRESH_TOKEN, response.data?.refreshToken);
-        this.store$.dispatch(login({username: 'Duy'}))
+        this.store$.dispatch(login())
         this.router.navigateByUrl(route.EMPTY);
       },
       error: (err: HttpErrorResponse) => {

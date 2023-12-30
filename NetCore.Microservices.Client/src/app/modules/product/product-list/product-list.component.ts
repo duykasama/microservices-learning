@@ -45,6 +45,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
   deleteProduct(id: number): void {
     this.productService.deleteProduct(id).subscribe();
+    setTimeout(() => this.loadProducts(), 500); // Temparory
   }
 
   constructor(
