@@ -5,6 +5,7 @@ using NetCore.Microservices.Services.ProductApi.Domain.Entities;
 using NetCore.Microservices.Services.ProductApi.Exceptions;
 using NetCore.Microservices.Services.ProductApi.Interfaces.Repositories;
 using NetCore.Microservices.Services.ProductApi.Interfaces.Services;
+using NetCore.Microservices.Services.ProductApi.Models.Requests;
 using NetCore.WebApiCommon.Api.Models;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
 using NetCore.WebApiCommon.Infrastructure.Implementations;
@@ -42,7 +43,7 @@ public class ProductService : GenericService, IProductService
         return new ApiActionResult(true, "Product created successfully");
     }
 
-    public async Task<ApiActionResult> UpdateProductAsync(int id, Guid auditor, DtoProduct dtoProduct)
+    public async Task<ApiActionResult> UpdateProductAsync(int id, Guid auditor, ProductUpdateRequest request)
     {
         var product = await _productRepository.GetAsync(id);
         if (product is null || product.IsDeleted)
@@ -50,7 +51,7 @@ public class ProductService : GenericService, IProductService
             throw new ProductDoesNotExistException($"Product with id '{id}' does not exist");
         }
 
-        _mapper.Map(dtoProduct, product);
+        _mapper.Map(request, product);
         product.SetAuditedInfo(auditor, DateTime.Now);
         await _productRepository.UpdateAsync(product);
         await _unitOfWork.CommitAsync();
