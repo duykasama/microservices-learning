@@ -1,0 +1,21 @@
+<section class="mt-8 rounded border border-gray-200 min-w-[1400px] flex flex-col">
+  <div class="flex justify-between p-4 text-2xl font-semibold">
+    <p class="text-white">{{ product.name }}</p>
+    <p class="text-orange-500">$ {{ product.price }}</p>
+  </div>
+  <div class="bg-gray-600 p-4 grid grid-cols-3">
+    <img src="{{ product.imageUrl }}" class="col-span-1"/>
+    <div class="col-span-2">
+      <span>{{ product.categoryName }}</span>
+      <p>{{ product.description }}</p>
+    </div>
+  </div>
+  <div class="grid grid-cols-2 gap-4 px-4 py-2">
+    <div class="w-full flex justify-center bg-green-500 rounded text-gray-100">
+      <button (click)="goBackToList()" type="button">Back to List</button>
+    </div>
+    <div class="w-full flex justify-center bg-slate-700 rounded text-gray-100">
+      <button (click)="addProductToCart(product.productId)" type="button" class="py-1">Add to Cart</button>
+    </div>
+  </div>
+</section>
