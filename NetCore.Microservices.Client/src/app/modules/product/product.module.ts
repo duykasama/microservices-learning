@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ProductDetailsComponent } from './product-details/product-details.component';
+import { NumberOnlyDirective } from 'src/app/core/directives/number-only.directive';
 
 
 
@@ -13,7 +14,8 @@ import { ProductDetailsComponent } from './product-details/product-details.compo
   declarations: [
     ProductListComponent,
     ProductCreateComponent,
-    ProductDetailsComponent
+    ProductDetailsComponent,
+    NumberOnlyDirective,
   ],
   imports: [
     CommonModule,

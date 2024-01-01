@@ -12,7 +12,6 @@ export class ProductComponent {
   product!: Product;
 
   goToProductDetails(id: number): void {
-    console.log('Button clicked');
     this.router.navigateByUrl(`${route.PRODUCT}/${route.PRODUCT_DETAILS}/${id}`);
   }
 
