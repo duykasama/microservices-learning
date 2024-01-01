@@ -8,6 +8,7 @@ import { RegisterComponent } from './modules/register/register.component';
 import { TestToastComponent } from './modules/test-toast/test-toast.component';
 import { route } from 'src/environments/routes';
 import { AuthGuard } from './core/guards/auth-guard.service';
+import { LoginGuard } from './core/guards/login-guard.service';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       },
       {
         path: route.LOGIN,
+        canActivate: [LoginGuard],
         component: LoginComponent
       },
       {

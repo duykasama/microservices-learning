@@ -12,7 +12,9 @@ public static class AutoMapperConfiguration
         mapper.CreateMap<Product, DtoProduct>()
             .ForMember((dest) => dest.ProductId, 
                 opt => opt.MapFrom(src => src.Id));
-        
+	
+	mapper.CreateMap<DtoProduct, Product>();
+
         mapper.CreateMap<ProductUpdateRequest, Product>();
     }
 }

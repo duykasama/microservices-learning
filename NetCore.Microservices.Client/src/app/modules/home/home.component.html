@@ -1,1 +1,7 @@
-<p>home works!</p>
+<section class="min-w-[1400px] my-4">
+  <div class="grid grid-cols-3 gap-4">
+    <ng-container *ngFor="let product of productList$ | async">
+      <app-product [product]="product"></app-product>
+    </ng-container>
+  </div>
+</section>

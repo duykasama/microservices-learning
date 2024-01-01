@@ -20,6 +20,7 @@ import { RegisterComponent } from './modules/register/register.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TestToastComponent } from './modules/test-toast/test-toast.component';
 import { EffectsModule } from '@ngrx/effects';
+import { ProductComponent } from './modules/home/components/product/product.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { EffectsModule } from '@ngrx/effects';
     NotFoundComponent,
     RegisterComponent,
     TestToastComponent,
+    ProductComponent,
   ],
   imports: [
     BrowserModule,

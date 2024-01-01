@@ -1,0 +1,24 @@
+<section class="mt-8 rounded border border-gray-200 min-w-[1400px] flex flex-col">
+  <div class="flex justify-between p-4 text-2xl font-semibold">
+    <p class="text-white">{{ (product$ | async)?.name }}</p>
+    <p class="text-orange-500">$ {{ (product$ | async)?.price }}</p>
+  </div>
+  <div class="bg-gray-600 p-4 grid grid-cols-3">
+    <img src="{{ (product$ | async)?.imageUrl }}" class="col-span-1"/>
+    <div class="col-span-2 flex flex-col justify-between">
+      <div>
+        <span>{{ (product$ | async )?.categoryName }}</span>
+        <p>{{ (product$ | async)?.description }}</p>
+      </div>
+      <input type="number" min=1 max=100 NumberOnly class="p-1 rounded w-full indent-2" />
+    </div>
+  </div>
+  <div class="grid grid-cols-2 gap-4 px-4 py-2">
+    <div class="w-full flex justify-center bg-green-500 rounded text-gray-100">
+      <button (click)="goBackToList()" type="button" class="py-1 w-full">Back to List</button>
+    </div>
+    <div class="w-full flex justify-center bg-slate-700 rounded text-gray-100">
+      <button (click)="addProductToCart()" type="button" class="py-1 w-full">Add to Cart</button>
+    </div>
+  </div>
+</section>

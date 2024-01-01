@@ -13,11 +13,11 @@ export class ToastService {
   success(content: string, title: string): void {
     this.displayToast(content, title, 'success');
   }
-  
+
   error(content: string, title: string): void {
     this.displayToast(content, title, 'error');
   }
-  
+
   private displayToast(content: string, title: string, status: 'success' | 'warning' | 'error'): void {
     const id: string = Guid.create().toString();
     const toast: SingleToast = {
@@ -25,11 +25,11 @@ export class ToastService {
       title,
       content,
       status,
-    };
-  
+   };
+
     this.store$.dispatch(addToast({toast}));
-  
-    setTimeout(() => this.store$.dispatch(removeToast({id})), 3000);    
+
+    setTimeout(() => this.store$.dispatch(removeToast({id})), 3000);
   }
 
   constructor(
