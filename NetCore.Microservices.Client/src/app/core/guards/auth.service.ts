@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { TokenType } from '../models/tokens.enum';
-import { Store } from '@ngrx/store';
-import { AppState } from '../store/AppState';
-import { Observable, map, of } from 'rxjs';
-import { selectUserId, selectUsername } from '../store/user/user.selectors';
+import { getLocalAccessToken } from '../lib/helpers';
+import { getExpirationTime } from '../lib/jwt-helper';
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +8,12 @@ import { selectUserId, selectUsername } from '../store/user/user.selectors';
 export class AuthService {
 
   isLoggedIn(): boolean {
-    let isloggedIn = false;
-    this.store$.select(selectUserId).pipe(
-      map((id: string) => !!id)
-    ).subscribe((val: boolean) => { isloggedIn = val });
-    return isloggedIn;
+    if (!getLocalAccessToken()) {
+      return false;
+    }
+    const expirationTime = getExpirationTime() || 0;
+    return Date.now() < expirationTime * 1000;
   }
 
-  constructor(
-    private store$: Store<AppState>
-  ) { }
+  constructor() { }
 }

@@ -17,7 +17,6 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const productIdStr = this.router.url.substring(this.router.url.lastIndexOf('/') + 1);
-    console.log(productIdStr);
     const productId = Number.parseInt(productIdStr);
     this.productService.getProductById(productId).pipe(takeUntil(this.destroy$)).subscribe((res: ApiResponse) => this.product = res.data);
   }
