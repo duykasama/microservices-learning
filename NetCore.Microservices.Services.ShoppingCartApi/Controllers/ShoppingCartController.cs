@@ -12,11 +12,43 @@ public class ShoppingCartController : BaseController {
         _shoppingCartService = shoppingCartService;
     }
 
-    [HttpPost("cart-upsert")]
+    [HttpGet("{userId}")]
+    public async Task<IActionResult> GetCart(string userId)
+    {
+        return await ExecuteApiAsync(
+            async () => await _shoppingCartService.GetCart(userId).ConfigureAwait(false)
+        ).ConfigureAwait(false);
+    }
+
+    [HttpPost("upsert-cart")]
     public async Task<IActionResult> UpsertCart(DtoCart cart)
     {
         return await ExecuteApiAsync(
             async () => await _shoppingCartService.UpsertCart(cart).ConfigureAwait(false)
+        ).ConfigureAwait(false);
+    }
+
+    [HttpPost("remove-cart")]
+    public async Task<IActionResult> RemoveCart(int cartDetailsId)
+    {
+        return await ExecuteApiAsync(
+            async () => await _shoppingCartService.RemoveCart(cartDetailsId).ConfigureAwait(false)
+        ).ConfigureAwait(false);
+    }
+    
+    [HttpPost("apply-coupon")]
+    public async Task<IActionResult> ApplyCoupon(string couponCode)
+    {
+        return await ExecuteApiAsync(
+            async () => await _shoppingCartService.ApplyCoupon(couponCode).ConfigureAwait(false)
+        ).ConfigureAwait(false);
+    }
+    
+    [HttpPost("remove-coupon")]
+    public async Task<IActionResult> RemoveCoupon(string couponCode)
+    {
+        return await ExecuteApiAsync(
+            async () => await _shoppingCartService.RemoveCoupon(couponCode).ConfigureAwait(false)
         ).ConfigureAwait(false);
     }
 }

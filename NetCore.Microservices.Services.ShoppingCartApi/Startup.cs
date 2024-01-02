@@ -2,6 +2,7 @@ using System.Reflection;
 using Autofac;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using NetCore.Microservices.Services.ShoppingCartApi.Constants;
 using NetCore.Microservices.Services.ShoppingCartApi.Data;
 using NetCore.Microservices.Services.ShoppingCartApi.Implementations.Repositories;
 using NetCore.Microservices.Services.ShoppingCartApi.Implementations.Services;
@@ -69,6 +70,14 @@ public class Startup
             .As<IUnitOfWork>()
             .InstancePerLifetimeScope();
 
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ProductService))!)
+            .As<IProductService>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CouponService))!)
+            .As<ICouponService>()
+            .InstancePerLifetimeScope();
+        
         var config = new MapperConfiguration(AutoMapperConfiguration.RegisterMaps);
         var mapper = config.CreateMapper();
         builder.RegisterInstance(mapper).As<IMapper>();
@@ -86,6 +95,8 @@ public class Startup
         });
         services.AddDefaultCorsPolicy();
         services.AddJwtAuthentication();
+        services.AddHttpClient(ClientServiceConstants.PRODUCT, client => client.BaseAddress = new Uri(Configuration["ServiceUrls:ProductApi"] ?? "https://localhost:9999"));
+        services.AddHttpClient(ClientServiceConstants.COUPON, client => client.BaseAddress = new Uri(Configuration["ServiceUrls:CouponApi"] ?? "https://localhost:9999"));
     }
 
     public void Configure(IApplicationBuilder app)
