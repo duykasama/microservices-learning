@@ -1,20 +1,22 @@
-using NetCore.WebApiCommon.Api.Controllers;
-using NetCore.Microservices.Services.ShoppingCartApi.Interfaces.Services;
 using Microsoft.AspNetCore.Mvc;
+using NetCore.Microservices.Services.ShoppingCartApi.Domain.Dtos;
+using NetCore.Microservices.Services.ShoppingCartApi.Interfaces.Services;
+using NetCore.WebApiCommon.Api.Controllers;
 
-namespace NetCore.Microservices.Services.ShoppingCartApi;
+namespace NetCore.Microservices.Services.ShoppingCartApi.Controllers;
 
-[Route("api/[controller]")]
-class ShoppingCartController : BaseController {
-	private readonly IShoppingCartService _shoppingCartService;
-	public ShoppingCartController(IShoppingCartService shoppingCartService) {
-		_shoppingCartService = shoppingCartService;
-	}
+[Route("api/cart")]
+public class ShoppingCartController : BaseController {
+    private readonly IShoppingCartService _shoppingCartService;
+    public ShoppingCartController(IShoppingCartService shoppingCartService) {
+        _shoppingCartService = shoppingCartService;
+    }
 
-
-	public async Task<IActionResult> GetAll(){
-		return await ExecuteApiAsync(
-			async () => await _shoppingCartService.GetAllAsync().ConfigureAwait(false)
-		).ConfigureAwait(false);
-	}
+    [HttpPost("cart-upsert")]
+    public async Task<IActionResult> UpsertCart(DtoCart cart)
+    {
+        return await ExecuteApiAsync(
+            async () => await _shoppingCartService.UpsertCart(cart).ConfigureAwait(false)
+        ).ConfigureAwait(false);
+    }
 }

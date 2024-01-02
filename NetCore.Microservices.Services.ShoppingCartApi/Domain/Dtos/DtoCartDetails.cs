@@ -2,6 +2,7 @@
 
 public class DtoCartDetails
 {
+    public int CartDetailsId { get; set; }
     public int CartHeaderId { get; set; }
     public DtoCartHeader? CartHeader { get; set; }
     public int ProductId { get; set; }

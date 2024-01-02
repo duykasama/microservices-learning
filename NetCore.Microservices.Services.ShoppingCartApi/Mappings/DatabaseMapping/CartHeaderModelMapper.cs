@@ -15,6 +15,10 @@ public class CartHeaderModelMapper : IDatabaseModelMapper
             entity.HasKey(e => e.Id)
                 .HasName("CartHeaderId");
 
+            entity.Property(e => e.Id)
+                .HasColumnName("CartHeaderId")
+                .ValueGeneratedOnAdd();
+
             entity.Ignore(e => e.Discount);
             entity.Ignore(e => e.CartTotal);
         });

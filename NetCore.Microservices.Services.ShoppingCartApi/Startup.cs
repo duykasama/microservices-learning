@@ -16,6 +16,7 @@ using NetCore.WebApiCommon.Core.DAL.Implementations;
 using NetCore.WebApiCommon.Core.DAL.Interfaces;
 using NetCore.WebApiCommon.Infrastructure.Extensions;
 using NetCore.WebApiCommon.Infrastructure.Implementations;
+using Newtonsoft.Json;
 using ServiceCollectionExtensions = NetCore.WebApiCommon.Infrastructure.Extensions.ServiceCollectionExtensions;
 
 namespace NetCore.Microservices.Services.ShoppingCartApi;
@@ -52,6 +53,14 @@ public class Startup
             .As<IShoppingCartRepository>()
             .InstancePerLifetimeScope();
         
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CartHeaderRepository))!)
+            .As<ICartHeaderRepository>()
+            .InstancePerLifetimeScope();
+        
+        builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(CartDetailsRepository))!)
+            .As<ICartDetailsRepository>()
+            .InstancePerLifetimeScope();
+        
         builder.RegisterAssemblyTypes(Assembly.GetAssembly(typeof(ShoppingCartService))!)
             .As<IShoppingCartService>()
             .InstancePerLifetimeScope();
@@ -71,7 +80,10 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddCustomSwagger();
-        services.AddControllers();
+        services.AddControllers().AddNewtonsoftJson(opts =>
+        {
+            opts.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+        });
         services.AddDefaultCorsPolicy();
         services.AddJwtAuthentication();
     }

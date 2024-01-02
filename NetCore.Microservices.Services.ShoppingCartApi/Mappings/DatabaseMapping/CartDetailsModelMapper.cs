@@ -15,7 +15,15 @@ public class CartDetailsModelMapper : IDatabaseModelMapper
             entity.HasKey(e => e.Id)
                 .HasName("CartDetailsId");
 
-            entity.Property(e => e.ProductId);
+            entity.Property(e => e.Id)
+                .HasColumnName("CartDetailsId")
+                .ValueGeneratedOnAdd();
+            
+            entity.HasOne<CartHeader>(e => e.CartHeader)
+                .WithMany(e => e.CartDetails)
+                .HasForeignKey(e => e.CartHeaderId);
+            
+            entity.Ignore(e => e.Product);
         });
     }
 }
