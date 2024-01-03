@@ -36,6 +36,24 @@ services:
       - api_database
       - api_web
     
+  product-service:
+    image: ${DOCKER_REGISTRY}/product-service:${VERSION}
+    container_name: mango-product-service
+    depends_on: 
+      - db
+    networks:
+      - api_database
+      - api_web
+    
+  shopping-cart-service:
+    image: ${DOCKER_REGISTRY}/shopping-cart-service:${VERSION}
+    container_name: mango-shopping-cart-service
+    depends_on: 
+      - db
+    networks:
+      - api_database
+      - api_web
+    
 networks:
   api_database:
     internal: true
