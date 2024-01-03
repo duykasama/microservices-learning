@@ -60,6 +60,12 @@ jobs:
       - name: Build authentication service image
         run: docker build -f NetCore.Microservices.Services.AuthApi/Dockerfile --build-arg GH_USER_NAME=${{ secrets.GH_USER_NAME }} --build-arg GH_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }} --build-arg GH_NUGET_SOURCE_URL=${{ secrets.GH_NUGET_SOURCE_URL }} -t ${{ env.IMAGE_PREFIX }}/auth-service:${{ steps.version.outputs.version-without-v }} .
           
+      - name: Build product service image
+        run: docker build -f NetCore.Microservices.Services.ProductApi/Dockerfile --build-arg GH_USER_NAME=${{ secrets.GH_USER_NAME }} --build-arg GH_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }} --build-arg GH_NUGET_SOURCE_URL=${{ secrets.GH_NUGET_SOURCE_URL }} -t ${{ env.IMAGE_PREFIX }}/auth-service:${{ steps.version.outputs.version-without-v }} .
+
+      - name: Build shoppinig cart service image
+        run: docker build -f NetCore.Microservices.Services.ShoppingCartApi/Dockerfile --build-arg GH_USER_NAME=${{ secrets.GH_USER_NAME }} --build-arg GH_AUTH_TOKEN=${{ secrets.GH_AUTH_TOKEN }} --build-arg GH_NUGET_SOURCE_URL=${{ secrets.GH_NUGET_SOURCE_URL }} -t ${{ env.IMAGE_PREFIX }}/auth-service:${{ steps.version.outputs.version-without-v }} .
+
       - name: Push gateway image
         run: docker push ${{ env.IMAGE_PREFIX }}/gateway:${{ steps.version.outputs.version-without-v }}
       
@@ -68,3 +74,9 @@ jobs:
           
       - name: Push auth service image
         run: docker push ${{ env.IMAGE_PREFIX }}/auth-service:${{ steps.version.outputs.version-without-v }}
+      
+      - name: Push product service image
+        run: docker push ${{ env.IMAGE_PREFIX }}/product-service:${{ steps.version.outputs.version-without-v }}
+      
+      - name: Push shopping cart service image
+        run: docker push ${{ env.IMAGE_PREFIX }}/shopping-cart-service:${{ steps.version.outputs.version-without-v }}

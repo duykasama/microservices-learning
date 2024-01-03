@@ -1,25 +1,28 @@
-var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+using Autofac.Extensions.DependencyInjection;
+using NetCore.Microservices.Services.ShoppingCartApi;
+using NetCore.WebApiCommon.Core.Common.Models;
+using NLog;
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+GlobalData.ModuleName = AppDomain.CurrentDomain.FriendlyName;
+GlobalData.CurrentEnvironment = "Development";
 
-var app = builder.Build();
+LogManager.Setup()
+    .LoadConfigurationFromFile($"{Directory.GetCurrentDirectory()}/Configurations/nlog.config")
+    .GetCurrentClassLogger();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+#region Create host with startup class
 
-app.UseHttpsRedirection();
+var host = Host.CreateDefaultBuilder(args)
+    .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+    .ConfigureWebHostDefaults(builder =>
+    {
+        builder.UseStartup<Startup>();
+    })
+    .Build();
 
-app.UseAuthorization();
+host.Run();
 
-app.MapControllers();
+#endregion
 
-app.Run();
+LogManager.Shutdown();
